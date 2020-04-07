@@ -32,7 +32,7 @@
                    HorizontalAlignment="Center">Draw here</TextBlock>
 
         <!-- Row 2 -->
-        <Border BorderThickness="1" Height="145" Width="105" Background="Black"
+        <Border BorderThickness="2" Height="145" Width="105" Background="Black"
                 Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4">
             <Border BorderThickness="0" Height="140" Width="100" Background="Black"
                 Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4">
@@ -42,7 +42,7 @@
         </Border>
         <!-- Row 3 -->
         <TextBlock Grid.Row="3" Grid.Column="3" 
-                   HorizontalAlignment="Center" Margin="0,20,0,0">Recognized letter: </TextBlock>
+                   HorizontalAlignment="Center" Margin="0,20,0,0">Recognized digit: </TextBlock>
         <TextBlock x:Name="WhatDigit" Grid.Row="3" Grid.Column="4" Margin="0,20,0,0"></TextBlock>
 
         <!-- Row 4 -->
@@ -52,8 +52,8 @@
         CommandParameter="{Binding ElementName=myCanvas}">Check</Button>
         <Button Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" 
                 MinWidth="100" Margin="10,20,0,0"
-                Command="{Binding ButtonCommand}" 
-                CommandParameter="Hai">Clear</Button>
+                Command="{Binding Path=ClearCanvasCommand}" 
+        CommandParameter="{Binding ElementName=myCanvas}">Clear</Button>
 
     </Grid>
 </Window>

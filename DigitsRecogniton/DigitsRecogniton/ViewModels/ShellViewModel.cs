@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.IO;
+using System.Windows.Controls;
 
 namespace DigitsRecogniton.ViewModels
 {
@@ -65,5 +66,44 @@ namespace DigitsRecogniton.ViewModels
 
 
 		}
+
+		private ICommand _clearCanvasCommand;
+
+		public ICommand ClearCanvasCommand
+		{
+			get
+			{
+				if (_clearCanvasCommand == null)
+					_clearCanvasCommand = new ClearCanvas();
+				return _clearCanvasCommand;
+			}
+			set { _clearCanvasCommand = value; }
+		}
+		class ClearCanvas : ICommand
+		{
+			#region ICommand Members  
+
+			public bool CanExecute(object parameter)
+			{
+				return true;
+			}
+			public event EventHandler CanExecuteChanged
+			{
+				add { CommandManager.RequerySuggested += value; }
+				remove { CommandManager.RequerySuggested -= value; }
+			}
+
+			public void Execute(object parameter)
+			{
+				InkCanvas newCanvas = (InkCanvas)parameter;
+				newCanvas.Strokes.Clear();
+				//((UIElement)parameter).
+			}
+			#endregion
+
+
+		}
+
+
 	}
 }

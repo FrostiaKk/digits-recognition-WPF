@@ -31,6 +31,11 @@ namespace DigitsRecogniton.ViewModels
 			ActivateItem(new CheckDigitViewModel());
 		}
 
+		public void LoadTrainAI()
+		{
+			ActivateItem(new TrainAIViewModel());
+		}
+
 
 	}
 }

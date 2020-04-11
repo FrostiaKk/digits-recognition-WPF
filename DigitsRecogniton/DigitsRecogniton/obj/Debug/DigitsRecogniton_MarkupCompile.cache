@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\mlody\Documents\GitHub\digits-recognition-WPF\DigitsRecogniton\DigitsRecogniton\App.xaml
-2-2049776354
+3-1350097783
 
-11-1841927388
-121-5998988
-Views\CheckDigitView.xaml;Views\ShellView.xaml;
+14-959437096
+123-1397979878
+Views\CheckDigitView.xaml;Views\ShellView.xaml;Views\TrainAIView.xaml;
 
 False
 

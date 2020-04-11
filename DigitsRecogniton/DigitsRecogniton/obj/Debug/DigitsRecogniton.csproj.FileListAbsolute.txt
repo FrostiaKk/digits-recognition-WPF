@@ -24,3 +24,5 @@ C:\Users\mlody\Documents\GitHub\digits-recognition-WPF\DigitsRecogniton\DigitsRe
 C:\Users\mlody\Documents\GitHub\digits-recognition-WPF\DigitsRecogniton\DigitsRecogniton\obj\Debug\DigitsRecogniton.pdb
 C:\Users\mlody\Documents\GitHub\digits-recognition-WPF\DigitsRecogniton\DigitsRecogniton\obj\Debug\Views\CheckDigitView.g.cs
 C:\Users\mlody\Documents\GitHub\digits-recognition-WPF\DigitsRecogniton\DigitsRecogniton\obj\Debug\Views\CheckDigitView.baml
+C:\Users\mlody\Documents\GitHub\digits-recognition-WPF\DigitsRecogniton\DigitsRecogniton\obj\Debug\Views\TrainAIView.g.cs
+C:\Users\mlody\Documents\GitHub\digits-recognition-WPF\DigitsRecogniton\DigitsRecogniton\obj\Debug\Views\TrainAIView.baml

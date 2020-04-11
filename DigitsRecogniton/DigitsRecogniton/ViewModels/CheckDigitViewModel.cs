@@ -1,6 +1,9 @@
 ﻿using Caliburn.Micro;
+using DigitsRecogniton.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -43,16 +46,31 @@ namespace DigitsRecogniton.ViewModels
 
 			public void Execute(object parameter)
 			{
-				var size = new Size(100, 140);
+				var size = new System.Windows.Size(100, 140);
 				((UIElement)parameter).Measure(size);
 				((UIElement)parameter).Arrange(new Rect(size));
 				RenderTargetBitmap rtb = new RenderTargetBitmap(100, 140, 96d, 96d, PixelFormats.Default);
+				
 				rtb.Render((UIElement)parameter);
+
+
+				
+
+				
 				BmpBitmapEncoder encoder = new BmpBitmapEncoder();
 				encoder.Frames.Add(BitmapFrame.Create(rtb));
-				FileStream fs = File.Open(@"d:\test.bmp", FileMode.Create);
-				encoder.Save(fs);
-				fs.Close();
+
+				MemoryStream stream = new MemoryStream();
+				encoder.Save(stream);
+				Bitmap bitmap = new Bitmap(stream);
+				
+				Binarization pic = new Binarization(bitmap);
+				pic.Convert();
+				pic.ImageBinarization().Save("tescik.png", ImageFormat.Png);
+
+				//FileStream fs = File.Open(@"d:\test.bmp", FileMode.Create);
+				//encoder.Save(fs);
+				stream.Close();
 			}
 			#endregion
 

@@ -63,10 +63,11 @@ namespace DigitsRecogniton.ViewModels
 				MemoryStream stream = new MemoryStream();
 				encoder.Save(stream);
 				Bitmap bitmap = new Bitmap(stream);
-				
 				Binarization pic = new Binarization(bitmap);
-				pic.Convert();
-				pic.ImageBinarization().Save("tescik.png", ImageFormat.Png);
+				//var new_image = pic.AutoCrop(new Bitmap(pic.ImageBinarization()));
+				//var ddd = pic.GetPositionOfSample(new Bitmap(pic.ImageBinarization()));
+				MessageBox.Show(pic.SaveSample());
+				//new_image.Save("tescik.png", ImageFormat.Png);
 
 				//FileStream fs = File.Open(@"d:\test.bmp", FileMode.Create);
 				//encoder.Save(fs);

@@ -7,6 +7,63 @@
              mc:Ignorable="d" Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!-- Row 1 -->
+        <TextBlock Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="5" 
+                   HorizontalAlignment="Center">Draw here</TextBlock>
+
+        <!-- Row 2 -->
+        <Border BorderThickness="2" Height="265" Width="205" Background="Black"
+                Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5">
+            <Border BorderThickness="0" Height="260" Width="200" Background="Black"
+                Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5">
+                <InkCanvas x:Name="myCanvas" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5" 
+                   Height="260" Width="200" Margin="0,0,0,0"></InkCanvas>
+            </Border>
+        </Border>
+        
+        <!-- Row 3 -->
+        <ComboBox Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2"
+                  Margin="0,20,0,0" SelectedItem="{Binding SelectedDigit}"
+                  x:Name="Digits">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Name="DigitName" Text="{Binding Name}"
+                               />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        
+        <!-- Row 4 -->
+        <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" 
+                MinWidth="100" Margin="0,20,10,0" Width="auto"
+                Command="{Binding Path=SavePatternCommand}" 
+        CommandParameter="{Binding ElementName=myCanvas}">Train</Button>
+        <Button Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" 
+                MinWidth="100" Margin="10,20,0,0"
+                Command="{Binding Path=ClearCanvasCommand}" 
+        CommandParameter="{Binding ElementName=myCanvas}">Clear</Button>
+        
+        <TextBlock Grid.Row="5" Grid.Column="1" x:Name="SelectedDigit_Name"/>
+
     </Grid>
 </UserControl>

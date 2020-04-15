@@ -23,7 +23,6 @@ namespace DigitsRecogniton.Views
         public ShellView()
         {
             InitializeComponent();
-            this.DataContext = new InkStrokeCollection();
         }
 
     }

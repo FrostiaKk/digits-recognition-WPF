@@ -11,29 +11,27 @@ using System.Windows.Media;
 using System.IO;
 using System.Windows.Controls;
 using DigitsRecogniton.Views;
+using DigitsRecogniton.Models;
 
 namespace DigitsRecogniton.ViewModels
 {
 	public class ShellViewModel : Conductor<object>
 	{
-		private string _whatDigit;
-
-		public string WhatDigit
+		public BindableCollection<Digit> digits { get; set; }
+		public ShellViewModel()
 		{
-			get { return _whatDigit; }
-			set { _whatDigit = value; }
+			SampleData data = new SampleData();
+			digits = new BindableCollection<Digit>(data.SetDigits());
 		}
-
 		
-
 		public void LoadCheckDigit()
 		{
-			ActivateItem(new CheckDigitViewModel());
+			ActivateItem(new CheckDigitViewModel(digits));
 		}
 
 		public void LoadTrainAI()
 		{
-			ActivateItem(new TrainAIViewModel());
+			ActivateItem(new TrainAIViewModel(digits));
 		}
 
 

@@ -29,6 +29,7 @@ namespace DigitsRecogniton.Models
         public Binarization(Bitmap img)
         {
             this.image = this.image = img;
+            SaveSample();
         }
 
         public void Convert()//convert to format24bpprgb
@@ -166,21 +167,45 @@ namespace DigitsRecogniton.Models
             return true;
         }
 
-        public string SaveSample()
+        public void SaveSample()
         {
             Convert();
             Bitmap bitmap = ImageBinarization();
             var cords = GetPositionOfSample(bitmap);
             Sampling(cords.Item1, cords.Item2, cords.Item3, cords.Item4, bitmap);
-            string show = " ";
-            foreach(double x in sample)
-            {
-                show += x.ToString();
-                show += "|";
-            }
-            return show;
         }
 
+        public void GetSample(double[] pSample)
+        {
+            int nIdx;
 
+            for (nIdx = 0; nIdx < 35; nIdx++)
+            {
+                pSample[nIdx] = sample[nIdx];
+            }
+        }
+
+        public int[] SampleToZerosAndOnes(double[] sample)
+        {
+            int[] sampleArray = new int[35];
+            int flag;
+            int nIdx;
+            double minInput = -0.5;
+
+            for (nIdx = 0; nIdx < 35; nIdx++)
+            {
+                if (sample[nIdx] == minInput)
+                {
+                    flag = 0;
+                }
+                else
+                {
+                    flag = 1;
+                }
+
+                sampleArray[nIdx] = flag;
+            }
+            return sampleArray;
+        }
     }
 }

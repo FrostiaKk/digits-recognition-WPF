@@ -106,6 +106,7 @@
     <Compile Include="Models\Digit.cs" />
     <Compile Include="Models\Kohonen.cs" />
     <Compile Include="Models\SampleData.cs" />
+    <Compile Include="Models\SaveCanvas.cs" />
     <Compile Include="Models\Training.cs" />
     <Compile Include="Models\TrainingSet.cs" />
     <Compile Include="ViewModels\CheckDigitViewModel.cs" />

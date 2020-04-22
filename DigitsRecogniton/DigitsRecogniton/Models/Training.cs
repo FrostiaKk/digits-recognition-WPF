@@ -1,10 +1,14 @@
 ﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace DigitsRecogniton.Models
 {
@@ -36,17 +40,33 @@ namespace DigitsRecogniton.Models
 			train = true;
 		}
 
-		static public void Train(object parameter)
+		static public string Recognize(object parameter, Kohonen pnet)
 		{
 			double norm;
 			int nNeuron;
 
 			if (!train)
 			{
-				MessageBox.Show("Sieć nie została jeszcze wytrenowana.\nNaciśnij przycisk 'Trenuj sieć'");
-				return;
+				return "Sieć nie została jeszcze wytrenowana.\nNaciśnij przycisk 'Trenuj sieć'";
 			}
 
+			double[] sample = new double[35];
+
+			var size = new System.Windows.Size(100, 140);
+			((UIElement)parameter).Measure(size);
+			((UIElement)parameter).Arrange(new Rect(size));
+			RenderTargetBitmap rtb = new RenderTargetBitmap(100, 140, 96d, 96d, PixelFormats.Default);
+			rtb.Render((UIElement)parameter);
+			BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+			encoder.Frames.Add(BitmapFrame.Create(rtb));
+
+			MemoryStream stream = new MemoryStream();
+			encoder.Save(stream);
+			Bitmap bitmap = new Bitmap(stream);
+			Binarization picture = new Binarization(bitmap);
+			picture.GetSample(sample);
+				nNeuron = pnet.Winner(ref sample, out norm);
+			return nNeuron.ToString();
 		}
 	}
 }

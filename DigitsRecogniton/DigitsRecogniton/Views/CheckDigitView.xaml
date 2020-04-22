@@ -43,7 +43,7 @@
         <!-- Row 3 -->
         <TextBlock Grid.Row="3" Grid.Column="3" 
                    HorizontalAlignment="Center" Margin="0,20,0,0">Recognized digit:</TextBlock>
-        <TextBlock x:Name="WhatDigit" Grid.Row="3" Grid.Column="4" Margin="0,20,0,0"></TextBlock>
+        <TextBlock x:Name="WhatDigit_Name" Grid.Row="3" Grid.Column="4" Margin="0,20,0,0"></TextBlock>
 
         <!-- Row 4 -->
         <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" 

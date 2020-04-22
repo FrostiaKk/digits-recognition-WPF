@@ -16,12 +16,16 @@ using System.Windows.Media.Imaging;
 
 namespace DigitsRecogniton.ViewModels
 {
-    class CheckDigitViewModel : Screen
-    {
+	class CheckDigitViewModel : Screen
+	{
+
+
+		public Kohonen kohonen = new Kohonen();
 		public BindableCollection<Digit> Digits { get; set; }
 		public CheckDigitViewModel(BindableCollection<Digit> digits)
 		{
 			Digits = digits;
+			Training.Train(kohonen, Digits);
 		}
 		private ICommand _saveCanvasCommand;
 
@@ -30,62 +34,12 @@ namespace DigitsRecogniton.ViewModels
 			get
 			{
 				if (_saveCanvasCommand == null)
-					_saveCanvasCommand = new SaveCanvas(Digits);
+					_saveCanvasCommand = new SaveCanvas(Digits, kohonen);
 				return _saveCanvasCommand;
 			}
 			set { _saveCanvasCommand = value; }
 		}
-		class SaveCanvas : ICommand
-		{
-			#region ICommand Members  
-			public BindableCollection<Digit> Digits { get; set; }
-			public SaveCanvas(BindableCollection<Digit> digits)
-			{
-				Digits = digits;
-			}
-			public bool CanExecute(object parameter)
-			{
-				return true;
-			}
-			public event EventHandler CanExecuteChanged
-			{
-				add { CommandManager.RequerySuggested += value; }
-				remove { CommandManager.RequerySuggested -= value; }
-			}
-
-			public void Execute(object parameter)
-			{
-				var size = new System.Windows.Size(100, 140);
-				((UIElement)parameter).Measure(size);
-				((UIElement)parameter).Arrange(new Rect(size));
-				RenderTargetBitmap rtb = new RenderTargetBitmap(100, 140, 96d, 96d, PixelFormats.Default);				
-				rtb.Render((UIElement)parameter);
-
-				BmpBitmapEncoder encoder = new BmpBitmapEncoder();
-				encoder.Frames.Add(BitmapFrame.Create(rtb));
-
-				MemoryStream stream = new MemoryStream();
-				encoder.Save(stream);
-				Bitmap bitmap = new Bitmap(stream);
-				Binarization pic = new Binarization(bitmap);
-				double[] ddd = new double[35];
-				pic.GetSample(ddd);
-
-
-				//MessageBox.Show(result.SampleString());
-				//MessageBox.Show(pic.SaveSample());
-				//new_image.Save("tescik.png", ImageFormat.Png);
-				//FileStream fs = File.Open(@"d:\test.bmp", FileMode.Create);
-				//encoder.Save(fs);
-				stream.Close();
-			}
-
-			
-
-			#endregion
-
-
-		}
+		
 
 		private ICommand _clearCanvasCommand;
 

@@ -18,6 +18,7 @@ namespace DigitsRecogniton.ViewModels
 	public class ShellViewModel : Conductor<object>
 	{
 		public BindableCollection<Digit> digits { get; set; }
+
 		public ShellViewModel()
 		{
 			SampleData data = new SampleData();

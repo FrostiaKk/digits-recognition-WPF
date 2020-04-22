@@ -97,7 +97,6 @@ namespace DigitsRecogniton.ViewModels
 				((UIElement)parameter).Arrange(new Rect(size));
 				RenderTargetBitmap rtb = new RenderTargetBitmap(100, 140, 96d, 96d, PixelFormats.Default);
 				rtb.Render((UIElement)parameter);
-
 				BmpBitmapEncoder encoder = new BmpBitmapEncoder();
 				encoder.Frames.Add(BitmapFrame.Create(rtb));
 
@@ -113,7 +112,6 @@ namespace DigitsRecogniton.ViewModels
 				SelectedDigit.SetSample(zeroOneArray);
 				arrLine[Int32.Parse(SelectedDigit.name)] = SelectedDigit.SampleString();
 				File.WriteAllLines(fileName, arrLine);
-				//Digit result = digitsList.Find(x => x.name ==);
 				
 				stream.Close();
 			}

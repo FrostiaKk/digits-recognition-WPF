@@ -1,11 +1,13 @@
 ﻿<UserControl x:Class="DigitsRecogniton.Views.CheckDigitView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DigitsRecogniton.Views"
-             mc:Ignorable="d" Background="White"
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" Background="#F0F0F0" FontSize="16"
+             d:DesignHeight="900" d:DesignWidth="1100">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -21,6 +23,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -29,31 +32,37 @@
 
         <!-- Row 1 -->
         <TextBlock Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" 
-                   HorizontalAlignment="Center">Draw here</TextBlock>
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,30">Draw here</TextBlock>
 
         <!-- Row 2 -->
-        <Border BorderThickness="2" Height="265" Width="205" Background="Black"
+
+        <Border BorderThickness="2" Height="565" Width="455" Background="Black"
                 Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4">
-            <Border BorderThickness="0" Height="260" Width="200" Background="Black"
+            <Border BorderThickness="0" Height="560" Width="450" Background="Black"
                 Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4">
                 <InkCanvas x:Name="myCanvas" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" 
-                   Height="260" Width="200" Margin="0,0,0,0"></InkCanvas>
+                   Height="560" Width="450" Margin="0,0,0,0"></InkCanvas>
             </Border>
         </Border>
         <!-- Row 3 -->
         <TextBlock Grid.Row="3" Grid.Column="3" 
-                   HorizontalAlignment="Center" Margin="0,20,0,0">Recognized digit:</TextBlock>
-        <TextBlock x:Name="WhatDigit_Name" Grid.Row="3" Grid.Column="4" Margin="0,20,0,0"></TextBlock>
+                   HorizontalAlignment="right" Margin="0,20,0,0">Recognized digit:</TextBlock>
+        <TextBlock x:Name="NameDigit" Grid.Row="3" Grid.Column="4" Margin="0,20,0,0"
+                   HorizontalAlignment="Center"></TextBlock>
 
         <!-- Row 4 -->
         <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" 
-                MinWidth="100" Margin="0,20,10,0"
-                Command="{Binding Path=SaveCanvasCommand}" 
-        CommandParameter="{Binding ElementName=myCanvas}">Check</Button>
+                MinWidth="200" MinHeight="30" 
+                Margin="0,20,10,0" Content="Check"
+                Command="{Binding Path=CheckDigitCommand}" 
+        CommandParameter="{Binding ElementName=myCanvas}">
+        </Button>
         <Button Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" 
-                MinWidth="100" Margin="10,20,0,0"
-                Command="{Binding Path=ClearCanvasCommand}" 
-        CommandParameter="{Binding ElementName=myCanvas}">Clear</Button>
+                MinWidth="200" MinHeight="30" 
+                Margin="10,20,0,0" Content="Clear"
+                Command="{Binding Path=ClearCanvasAndDigitCommand}" 
+        CommandParameter="{Binding ElementName=myCanvas}"></Button>
 
     </Grid>
 </UserControl>

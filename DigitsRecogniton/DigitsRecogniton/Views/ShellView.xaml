@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DigitsRecogniton.Views"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="ShellView" MinHeight="500" Width="500">
+        Title="ShellView" MinHeight="500" MinWidth="700" Width="1100"
+        Background="#F0F0F0" FontSize="16">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -21,20 +23,20 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        
+
         <!-- Row 1 -->
         <Button x:Name="LoadCheckDigit" Grid.Row="1" Grid.Column="2" 
-                Margin="0,0,10,10" MinWidth="100" 
+                Margin="0,0,10,10" MinWidth="200" MinHeight="30" 
                 HorizontalAlignment="Right">Check Digit</Button>
         <Button x:Name="LoadTrainAI" Grid.Row="1" Grid.Column="3" 
                 Margin="10,0,0,10" HorizontalAlignment="Left" 
-                MinWidth="100">Train AI</Button>
-        
+                MinWidth="200" MinHeight="30" >Train AI</Button>
+
         <!-- Row 2 -->
         <ContentControl Grid.Row="2" Grid.Column="2"
                         Grid.ColumnSpan="2" x:Name="ActiveItem"

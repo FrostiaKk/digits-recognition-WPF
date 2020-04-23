@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DigitsRecogniton.Views"
-             mc:Ignorable="d" Background="White"
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" Background="#F0F0F0" FontSize="16"
+             d:DesignHeight="900" d:DesignWidth="1100">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -21,6 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -28,23 +29,25 @@
         </Grid.RowDefinitions>
 
         <!-- Row 1 -->
-        <TextBlock Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="5" 
-                   HorizontalAlignment="Center">Draw here</TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" 
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20">Draw here</TextBlock>
 
         <!-- Row 2 -->
-        <Border BorderThickness="2" Height="265" Width="205" Background="Black"
-                Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5">
-            <Border BorderThickness="0" Height="260" Width="200" Background="Black"
-                Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5">
-                <InkCanvas x:Name="myCanvas" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5" 
-                   Height="260" Width="200" Margin="0,0,0,0"></InkCanvas>
+        <Border BorderThickness="2" Height="565" Width="455" Background="Black"
+                Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4">
+            <Border BorderThickness="0" Height="560" Width="450" Background="Black"
+                Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4">
+                <InkCanvas x:Name="myCanvas" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" 
+                   Height="560" Width="450" Margin="0,0,0,0"></InkCanvas>
             </Border>
         </Border>
-        
+
+
         <!-- Row 3 -->
         <ComboBox Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2"
                   Margin="0,20,0,0" SelectedItem="{Binding SelectedDigit}"
-                  x:Name="Digits">
+                  x:Name="Digits" MinWidth="200" MinHeight="30" >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Name="DigitName" Text="{Binding Name}"
@@ -55,15 +58,14 @@
         
         <!-- Row 4 -->
         <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" 
-                MinWidth="100" Margin="0,20,10,0" Width="auto"
+                MinWidth="200" MinHeight="30"  Margin="0,20,10,0"
                 Command="{Binding Path=SavePatternCommand}" 
         CommandParameter="{Binding ElementName=myCanvas}">Train</Button>
         <Button Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" 
-                MinWidth="100" Margin="10,20,0,0"
+                MinWidth="200" MinHeight="30"  Margin="10,20,0,0"
                 Command="{Binding Path=ClearCanvasCommand}" 
         CommandParameter="{Binding ElementName=myCanvas}">Clear</Button>
         
-        <TextBlock Grid.Row="5" Grid.Column="1" x:Name="SelectedDigit_Name"/>
 
     </Grid>
 </UserControl>

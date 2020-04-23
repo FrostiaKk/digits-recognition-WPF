@@ -1,21 +1,20 @@
 ﻿using Caliburn.Micro;
+using DigitsRecogniton.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DigitsRecogniton.Models
 {
-	class SaveCanvas : ICommand
+    class CheckDigit : ICommand
 	{
 		#region ICommand Members  
 		public BindableCollection<Digit> Digits { get; set; }
+		public CheckDigitViewModel View;
 
 		public Kohonen kohonen { get; set; }
-		public SaveCanvas(BindableCollection<Digit> digits, Kohonen kohonen)
+		public CheckDigit(BindableCollection<Digit> digits, Kohonen kohonen, CheckDigitViewModel view)
 		{
+			View = view;
 			Digits = digits;
 			this.kohonen = kohonen;
 		}
@@ -31,9 +30,8 @@ namespace DigitsRecogniton.Models
 
 		public void Execute(object parameter)
 		{
-			Training.Recognize(parameter, kohonen);
+			View.NameDigit = Training.Recognize(parameter, kohonen);
 		}
-
-		#endregion
-	}
+        #endregion
+    }
 }

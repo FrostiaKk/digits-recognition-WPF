@@ -4,12 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -19,6 +21,20 @@ namespace DigitsRecogniton.ViewModels
 	class CheckDigitViewModel : Screen
 	{
 
+		private string namedigit;
+		private ICommand _clearCanvasAndDigitCommand;
+		private ICommand _checkDigitCommand;
+
+		public string NameDigit
+		{
+			get { return namedigit; }
+			set 
+			{
+				namedigit = value;
+				NotifyOfPropertyChange(() => NameDigit);
+			}
+		}
+
 
 		public Kohonen kohonen = new Kohonen();
 		public BindableCollection<Digit> Digits { get; set; }
@@ -27,32 +43,35 @@ namespace DigitsRecogniton.ViewModels
 			Digits = digits;
 			Training.Train(kohonen, Digits);
 		}
-		private ICommand _saveCanvasCommand;
+		
 
-		public ICommand SaveCanvasCommand
+		public ICommand CheckDigitCommand
 		{
 			get
 			{
-				if (_saveCanvasCommand == null)
-					_saveCanvasCommand = new SaveCanvas(Digits, kohonen);
-				return _saveCanvasCommand;
+				if (_checkDigitCommand == null)
+					_checkDigitCommand = new CheckDigit(Digits, kohonen, this);
+				return _checkDigitCommand;
 			}
-			set { _saveCanvasCommand = value; }
+			set { _checkDigitCommand = value; }
 		}
 		
 
-		private ICommand _clearCanvasCommand;
+		
 
-		public ICommand ClearCanvasCommand
+		public ICommand ClearCanvasAndDigitCommand
 		{
 			get
 			{
-				if (_clearCanvasCommand == null)
-					_clearCanvasCommand = new ClearCanvas();
-				return _clearCanvasCommand;
+				if (_clearCanvasAndDigitCommand == null)
+					_clearCanvasAndDigitCommand = new ClearCanvasAndDigit(this);
+				return _clearCanvasAndDigitCommand;
 			}
-			set { _clearCanvasCommand = value; }
+			set { _clearCanvasAndDigitCommand = value; }
 		}
 
+
 	}
+
+
 }

@@ -102,11 +102,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Binarization.cs" />
+    <Compile Include="Models\CheckDigit.cs" />
     <Compile Include="Models\ClearCanvas.cs" />
+    <Compile Include="Models\ClearCanvasAndDigit.cs" />
     <Compile Include="Models\Digit.cs" />
     <Compile Include="Models\Kohonen.cs" />
     <Compile Include="Models\SampleData.cs" />
-    <Compile Include="Models\SaveCanvas.cs" />
+    <Compile Include="Models\SavePattern.cs" />
     <Compile Include="Models\Training.cs" />
     <Compile Include="Models\TrainingSet.cs" />
     <Compile Include="ViewModels\CheckDigitViewModel.cs" />

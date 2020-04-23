@@ -9,7 +9,7 @@ namespace DigitsRecogniton.Models
     public class Digit
     {
 
-        public readonly string name;
+        public string name;
         public int[] sample = new int[35];
         public Digit(string name, int[] sample)
         {
@@ -18,6 +18,11 @@ namespace DigitsRecogniton.Models
             {
                 this.sample[i] = sample[i];
             }
+        }
+
+        public Digit()
+        {
+
         }
 
         public void SetSample(int[] sample)

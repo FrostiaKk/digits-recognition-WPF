@@ -52,10 +52,10 @@ namespace DigitsRecogniton.Models
 
 			double[] sample = new double[35];
 
-			var size = new System.Windows.Size(100, 140);
+			var size = new System.Windows.Size(450, 560);
 			((UIElement)parameter).Measure(size);
 			((UIElement)parameter).Arrange(new Rect(size));
-			RenderTargetBitmap rtb = new RenderTargetBitmap(100, 140, 96d, 96d, PixelFormats.Default);
+			RenderTargetBitmap rtb = new RenderTargetBitmap(450, 560, 96d, 96d, PixelFormats.Default);
 			rtb.Render((UIElement)parameter);
 			BmpBitmapEncoder encoder = new BmpBitmapEncoder();
 			encoder.Frames.Add(BitmapFrame.Create(rtb));

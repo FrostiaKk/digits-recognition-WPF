@@ -28,7 +28,7 @@ namespace DigitsRecogniton.Models
 
         public Binarization(Bitmap img)
         {
-            this.image = this.image = img;
+            this.image = img;
             SaveSample();
         }
 
@@ -79,7 +79,7 @@ namespace DigitsRecogniton.Models
             newImage.UnlockBits(OutputData);
             return newImage;
         }
-
+        /*
         public byte[][] GetRGB(Bitmap bmp)
         {
             BitmapData bmp_data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
@@ -119,6 +119,27 @@ namespace DigitsRecogniton.Models
            
             //return cords of cut rectangle
             return Tuple.Create(left,top,right,bottom);
+        }*/
+
+        private Tuple<int, int, int, int> GetSize(Bitmap bitmap)
+        {
+            int top=560, bottom=0, left=450, right=0;
+            for(int y=0;y<559;y++)
+            {
+                for(int x=0;x<449;x++)
+                {
+                    Color pixelColor = bitmap.GetPixel(x, y);
+                    if (pixelColor.R < 50)
+                    {
+                        if (x > right) right = x;
+                        if (x < left) left = x;
+                        if (y < top) top = y;
+                        if (y > bottom) bottom = y;
+                    }
+                }
+            }
+
+            return Tuple.Create(left, top, right, bottom);
         }
 
         public void Sampling(int left, int top, int right, int bottom, Bitmap bitmap)
@@ -171,7 +192,7 @@ namespace DigitsRecogniton.Models
         {
             Convert();
             Bitmap bitmap = ImageBinarization();
-            var cords = GetPositionOfSample(bitmap);
+            var cords = GetSize(bitmap);
             Sampling(cords.Item1, cords.Item2, cords.Item3, cords.Item4, bitmap);
         }
 
